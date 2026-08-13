@@ -1,0 +1,36 @@
+const int pirPin = 2;
+const int ledPin = 3;
+const int buzzerPin = 4;
+
+void setup() {
+  pinMode(pirPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+
+  digitalWrite(ledPin, LOW);
+  digitalWrite(buzzerPin, LOW);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  int motion = digitalRead(pirPin);
+
+  if (motion == HIGH) {
+    digitalWrite(ledPin, HIGH);
+
+    // For a passive buzzer
+    tone(buzzerPin, 1000);
+
+    Serial.println("Motion detected!");
+  } 
+  else {
+    digitalWrite(ledPin, LOW);
+
+    noTone(buzzerPin);
+
+    Serial.println("No motion");
+  }
+
+  delay(100);
+}
